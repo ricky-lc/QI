@@ -5,7 +5,7 @@ const PROFILE_KEY = '@qi_user_profile';
 const RESULTS_KEY = '@qi_results';
 
 function generateId(): string {
-  return Math.random().toString(36).substr(2, 9) + Date.now().toString(36);
+  return Math.random().toString(36).slice(2, 11) + Date.now().toString(36);
 }
 
 export async function getUserProfile(): Promise<UserProfile> {

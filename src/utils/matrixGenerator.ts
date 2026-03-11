@@ -1,8 +1,5 @@
 import { MatrixData } from '../types';
 
-const SHAPES = ['○', '□', '△', '◇', '★', '●', '■', '▲', '◆'];
-const FILLS = ['░', '▒', '▓', '█'];
-
 type ShapeCode = 'circle' | 'square' | 'triangle' | 'diamond' | 'star' | 'hexagon' | 'cross' | 'arrow';
 type FillCode = 'empty' | 'half' | 'full' | 'dot';
 
