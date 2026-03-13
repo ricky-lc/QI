@@ -7,6 +7,8 @@ import { TestScreen } from '../screens/TestScreen';
 import { ResultsScreen } from '../screens/ResultsScreen';
 import { TrainingScreen } from '../screens/TrainingScreen';
 import { ProfileScreen } from '../screens/ProfileScreen';
+import { CreditsScreen } from '../screens/CreditsScreen';
+import { SettingsScreen } from '../screens/SettingsScreen';
 import { COLORS } from '../constants/colors';
 
 const Stack = createStackNavigator();
@@ -29,6 +31,8 @@ export function AppNavigator() {
         <Stack.Screen name="Results" component={ResultsScreen} />
         <Stack.Screen name="Training" component={TrainingScreen} />
         <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="Credits" component={CreditsScreen} />
+        <Stack.Screen name="Settings" component={SettingsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

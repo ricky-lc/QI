@@ -10,7 +10,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { COLORS, CATEGORY_GRADIENTS } from '../constants/colors';
-import { TEST_CONFIGS, FULL_TEST_CONFIG } from '../constants/tests';
+import { TEST_CONFIGS, FULL_TEST_CONFIG, QUICK_TEST_CONFIG } from '../constants/tests';
 import { GlassCard } from '../components/GlassCard';
 import { GlassButton } from '../components/GlassButton';
 import { TestType } from '../types';
@@ -24,13 +24,15 @@ export function TestSelectionScreen() {
 
   const config = typeParam === 'full'
     ? FULL_TEST_CONFIG
+    : typeParam === 'quick'
+    ? QUICK_TEST_CONFIG
     : TEST_CONFIGS.find((c) => c.id === typeParam);
 
-  const gradient = CATEGORY_GRADIENTS[typeParam as TestType] || ['#667eea', '#764ba2'];
+  const gradient = CATEGORY_GRADIENTS[typeParam as TestType] || (typeParam === 'quick' ? ['#43e97b', '#38f9d7'] as [string, string] : ['#667eea', '#764ba2'] as [string, string]);
 
   if (!config) return null;
 
-  const isFull = typeParam === 'full';
+  const isFull = typeParam === 'full' || typeParam === 'quick';
 
   return (
     <View style={styles.screen}>

@@ -12,7 +12,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 import { useNavigation } from '@react-navigation/native';
 import { COLORS, CATEGORY_GRADIENTS } from '../constants/colors';
-import { TEST_CONFIGS, FULL_TEST_CONFIG } from '../constants/tests';
+import { TEST_CONFIGS, FULL_TEST_CONFIG, QUICK_TEST_CONFIG } from '../constants/tests';
 import { GlassCard } from '../components/GlassCard';
 import { GlassButton } from '../components/GlassButton';
 import { ResultsChart } from '../components/ResultsChart';
@@ -99,11 +99,18 @@ export function HomeScreen() {
           {/* Quick Start */}
           <Text style={styles.sectionLabel}>Quick Assessment</Text>
           <GlassButton
-            title={`${FULL_TEST_CONFIG.icon} Full IQ Test (~${FULL_TEST_CONFIG.duration} min)`}
-            onPress={() => navigation.navigate('TestSelection', { type: 'full' })}
-            gradient={['#667eea', '#764ba2']}
+            title={`${QUICK_TEST_CONFIG.icon} Quick IQ Test (~${QUICK_TEST_CONFIG.duration} min, ${QUICK_TEST_CONFIG.questionCount} Q)`}
+            onPress={() => navigation.navigate('TestSelection', { type: 'quick' })}
+            gradient={['#43e97b', '#38f9d7']}
             style={styles.fullTestBtn}
             size="lg"
+          />
+          <GlassButton
+            title={`⚡ Full IQ Test (~${FULL_TEST_CONFIG.duration} min)`}
+            onPress={() => navigation.navigate('TestSelection', { type: 'full' })}
+            gradient={['#667eea', '#764ba2']}
+            style={[styles.fullTestBtn, { marginTop: -8 }]}
+            size="md"
           />
 
           {/* Test Categories */}
@@ -144,6 +151,22 @@ export function HomeScreen() {
             <GlassButton
               title="🏋️ Practice"
               onPress={() => navigation.navigate('Training')}
+              variant="ghost"
+              size="sm"
+              style={{ flex: 1 }}
+            />
+          </View>
+          <View style={[styles.bottomLinks, { marginTop: 0 }]}>
+            <GlassButton
+              title="⚙️ Settings"
+              onPress={() => navigation.navigate('Settings')}
+              variant="ghost"
+              size="sm"
+              style={{ flex: 1 }}
+            />
+            <GlassButton
+              title="ℹ️ Credits"
+              onPress={() => navigation.navigate('Credits')}
               variant="ghost"
               size="sm"
               style={{ flex: 1 }}
