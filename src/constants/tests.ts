@@ -84,6 +84,16 @@ export const FULL_TEST_CONFIG = {
   color: '#E8B3FF',
 };
 
+export const QUICK_TEST_CONFIG = {
+  id: 'quick',
+  title: 'Quick IQ Test',
+  description: 'A brief 15-question test covering all intelligence types — done in under 10 minutes',
+  icon: '⚡',
+  duration: 10,
+  questionCount: 15,
+  color: '#B3FFD4',
+};
+
 export const IQ_SCALE = {
   genius: { min: 145, label: 'Genius', emoji: '🌟' },
   verySuperior: { min: 130, label: 'Very Superior', emoji: '✨' },

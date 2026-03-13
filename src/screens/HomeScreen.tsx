@@ -31,8 +31,8 @@ export function HomeScreen() {
   useEffect(() => {
     loadResults();
     Animated.parallel([
-      Animated.timing(fadeAnim, { toValue: 1, duration: 800, useNativeDriver: true }),
-      Animated.spring(slideAnim, { toValue: 0, friction: 7, useNativeDriver: true }),
+      Animated.timing(fadeAnim, { toValue: 1, duration: 800, useNativeDriver: false }),
+      Animated.spring(slideAnim, { toValue: 0, friction: 7, useNativeDriver: false }),
     ]).start();
   }, []);
 
@@ -60,6 +60,7 @@ export function HomeScreen() {
       <ScrollView
         contentContainerStyle={styles.scroll}
         showsVerticalScrollIndicator={false}
+        style={{ backgroundColor: COLORS.bgPrimary }}
       >
         <Animated.View style={{ opacity: fadeAnim, transform: [{ translateY: slideAnim }] }}>
           {/* Header */}

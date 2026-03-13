@@ -22,18 +22,22 @@ import { generateQuestionsForTest, updateAdaptiveState, createInitialAdaptiveSta
 import { processTestSession } from '../utils/scoreCalculator';
 import { saveResult } from '../utils/storage';
 import { detectBot, isBotLikely } from '../utils/botDetection';
-import { Question, Answer, TestSession, TestType, Difficulty } from '../types';
+import { Question, Answer, TestSession, TestType } from '../types';
 
 type RouteParams = { type: string; mode: 'assessment' | 'practice' };
 
-const QUESTIONS_PER_TEST = 12;
+function getQuestionCount(testType: string): number {
+  if (testType === 'full') return 60;
+  if (testType === 'quick') return 15;
+  return 12;
+}
 
 export function TestScreen() {
   const navigation = useNavigation<any>();
   const route = useRoute<RouteProp<Record<string, RouteParams>, string>>();
   const { type, mode = 'assessment' } = route.params || {};
 
-  const testType = type as TestType;
+  const testType = type;
   const gradient = CATEGORY_GRADIENTS[testType] || ['#667eea', '#764ba2'];
 
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -51,7 +55,7 @@ export function TestScreen() {
   const slideAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    const qs = generateQuestionsForTest(testType, QUESTIONS_PER_TEST);
+    const qs = generateQuestionsForTest(testType, getQuestionCount(testType));
     setQuestions(qs);
     setIsLoading(false);
   }, [testType]);
@@ -66,7 +70,7 @@ export function TestScreen() {
 
   const slideIn = () => {
     slideAnim.setValue(50);
-    Animated.spring(slideAnim, { toValue: 0, friction: 8, useNativeDriver: true }).start();
+    Animated.spring(slideAnim, { toValue: 0, friction: 8, useNativeDriver: false }).start();
   };
 
   const currentQuestion = questions[currentIndex];
@@ -95,7 +99,7 @@ export function TestScreen() {
 
     if (mode === 'practice') {
       setShowFeedback(true);
-      Animated.timing(feedbackAnim, { toValue: 1, duration: 300, useNativeDriver: true }).start();
+      Animated.timing(feedbackAnim, { toValue: 1, duration: 300, useNativeDriver: false }).start();
     } else {
       // Assessment: brief pause then advance
       setTimeout(() => advanceQuestion(answer), 600);
@@ -120,7 +124,7 @@ export function TestScreen() {
   const finishTest = async (allAnswers: Answer[]) => {
     const session: TestSession = {
       id: sessionId.current,
-      type: testType,
+      type: testType as TestType,
       mode,
       startedAt: Number(sessionId.current),
       completedAt: Date.now(),
@@ -221,6 +225,7 @@ export function TestScreen() {
       <ScrollView
         contentContainerStyle={styles.scroll}
         showsVerticalScrollIndicator={false}
+        style={{ backgroundColor: COLORS.bgPrimary }}
       >
         <Animated.View style={{ transform: [{ translateY: slideAnim }] }}>
           {/* Question Type Badge */}

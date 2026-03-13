@@ -91,7 +91,7 @@ export function ResultsScreen() {
         style={StyleSheet.absoluteFill}
       />
 
-      <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
+      <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false} style={{ backgroundColor: COLORS.bgPrimary }}>
         {/* Shareable card */}
         <ViewShot ref={viewShotRef} options={{ format: 'png', quality: 0.95 }}>
           <View style={styles.shareableArea}>

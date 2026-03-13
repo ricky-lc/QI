@@ -42,7 +42,7 @@ export function TestSelectionScreen() {
 
       <View style={[styles.orb, { backgroundColor: gradient[0] }]} />
 
-      <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
+      <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false} style={{ backgroundColor: COLORS.bgPrimary }}>
         {/* Back */}
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.back}>
           <Text style={styles.backText}>← Back</Text>
